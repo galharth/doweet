@@ -1,0 +1,18 @@
+<% form_tag "/friendships/index", :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
+
+<%= link_to "Import some friends with gmail...", :controller => "imported_contacts", :action => "authenticate"  %> <br />
+
+<% @users.each do |u| %>
+	<% if u.id != current_user.id && Friendship.where(:user_id => current_user.id, :friend_id => u.id).any? == false%>
+	<%= u.name %>
+	<%= link_to "Add as a friend", add_path(:user_id => current_user.id , :friend_id => u.id) %>
+	<br />
+	<% end %>
+<% end %>
+

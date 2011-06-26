@@ -1,0 +1,29 @@
+<%= link_to "Month Calendar", "monthcalendar"%>
+
+
+<p style="font-size:20px"><%= link_to "Previews", :next => @next.to_i - 1 %> | 
+<%= link_to "Next", :next => @next.to_i + 1 %>
+</p>
+
+
+<div style="margin-top:50px;margin-left:100px;">
+
+<% 7.times do |n| %>
+<p style="float:left;width:160px">
+<%= @days_names[n]  %> -- <%= @week_num * 7 - 6 + n - 3%><br />
+
+<% @days[n].each do |s| %>
+<%= link_to s.content, status_path(s) %>
+<% if s.user_id != current_user.id %>
+-- <%= link_to "Doweet", doweet_path(s) %> 
+<% end %>
+-- <%= link_to "Done", status_path(s), :method => :delete %> 
+<br />
+<%= s.date.to_formatted_s(:doweet_date) %><br />
+<% end %>
+</p>
+<% end %>
+
+</div>
+
+

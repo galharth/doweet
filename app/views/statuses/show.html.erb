@@ -1,0 +1,27 @@
+<% user = User.find(@status.user_id) %>
+<%= image_tag(user.image_url, :width => "50px", :height => "50px") %>
+<%= user.name  %> wants to:
+<%= @status.content %> 
+<% if @status.user_id != current_user.id %>
+-- <%= link_to "lets doweet!", doweet_path(:id => @status.id) %>
+<% end %>
+<br />
+<% if @status.do_withs.empty? == false %>
+with:
+<% end %>
+<% @status.do_withs.each do |w| %> 
+<%= User.find(w.friend_id).name %>, 
+<% end %>
+at: <%= @status.date.to_formatted_s(:doweet_date) %> 
+<% if already_likes?(@status, current_user)%>
+<%= link_to "Like!", like_path(:id => @status)%> 
+<% end %>
+<%= @status.likes.size %> Likes <br />
+<% @status.comments.each do |c| %>
+<%= User.find(c.user_id).name %> | <%= c.comment %><br />
+<% end %>
+<% form_tag comment_path do %>
+<%= text_field_tag 'comment' %>
+<%= hidden_field_tag 'status', @status.id %>
+<%= submit_tag 'Save' %>
+<% end %>

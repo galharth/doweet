@@ -1,0 +1,14 @@
+<% x = 0 %>
+<% @requests.each do |r| %>
+	<% if r.status != true%>
+	<% friend = User.find(r.user_id) %>
+	<%= friend.name %>
+	<%= link_to "Confirm", confirm_path(:id => r.id) %>
+	<%= link_to "Decline", decline_path(:id => r.id) %>
+	<% x += 1 %>
+	<% end %>
+<% end %>
+
+<% if x == 0 %>
+You don't have any friend requests.
+<% end %>

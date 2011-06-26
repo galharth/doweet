@@ -1,0 +1,53 @@
+<p>getting things done, the social way!</p> 
+
+<%= form_for @user, :validate => true do |f| %>
+  <% if @user.errors.any? %>
+    <div class="error_messages">
+      <h2>Form is invalid</h2>
+      <ul>
+        <% for message in @user.errors.full_messages %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name, :autocomplete => "off" %>
+  </p>
+
+  <p>
+    <%= f.label :email %><br />
+    <%= f.text_field :email, :autocomplete => "off" %>
+  </p>
+  <p>
+    <%= f.label :password %><br />
+    <%= f.password_field :password, :autocomplete => "off" %>
+  </p>
+  <p>
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, :autocomplete => "off" %>
+  </p>
+  <p class="button"><%= f.submit %></p>
+<% end %>
+
+
+
+
+<%= form_tag sessions_path do %>
+  <p>
+    <%= label_tag :email %><br />
+    <%= text_field_tag :email, params[:email], :autocomplete => "off" %>
+  </p>
+  <p>
+    <%= label_tag :password %><br />
+    <%= password_field_tag :password %>
+  </p>
+  <p class="button"><%= submit_tag "Log in" %></p>
+<% end %>
+
+ 
+<br />
+
+  <%= link_to "Sign in with Facebook", "/auth/facebook" %>
+

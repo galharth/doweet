@@ -1,0 +1,46 @@
+
+<div style="margin-top:150px">
+<% form_for @status do |f| %>
+
+<%= f.text_field :content, :id => "status_field", :placeholder => "What do you want to do?", :class => "bok_round" %> <%= f.submit "Doweet!" %><br /><br />
+<p style="display:inline;" id="when">When?</p> <%= f.text_field :date_string, :id => "date", :placeholder => "Press here to add a date"  %> <p style="display:inline;" id="group">Group? <%= f.select  :group, ["All", "Friends" , "School",  "Choose Friends", "Add New Group"] %></p><p style="display:inline;" id="private">  <%= check_box("status", "private", {}, true, false) %> Private?</p>
+
+<% end %>
+
+</div>
+
+
+<div style="margin-top:60px;">
+<% @statuses.each do |s| %>
+	<% user = User.find(s.user_id) %>
+	<%= image_tag(user.image_url, :width => "50px", :height => "50px") %>
+	<%= user.name  %> wants to:
+	<%= s.content %> 
+	<% if s.user_id != current_user.id %>
+	-- <%= link_to "lets doweet!", doweet_path(:id => s.id) %>
+	<% end %>
+	<br />
+	<% if s.do_withs.empty? == false %>
+	with:
+	<% end %>
+	<% s.do_withs.each do |w| %> 
+	<%= User.find(w.friend_id).name %>, 
+	<% end %>
+	at: <%= s.date.to_formatted_s(:doweet_date) %> 
+	<% if already_likes?(s, current_user)%>
+	<%= link_to "Like!", like_path(:id => s)%> 
+	<% end %>
+	<%= s.likes.size %> Likes <br />
+	<% s.comments.each do |c| %>
+	<%= User.find(c.user_id).name %> | <%= c.comment %><br />
+	<% end %>
+	<% form_tag comment_path do %>
+	<%= text_field_tag 'comment' %>
+	<%= hidden_field_tag 'status', s.id %>
+	<%= submit_tag 'Save' %>
+	<% end %>
+	<p style="border-bottom: 1px dotted #000000; width: 285px;"> </p>
+	<br />	
+<% end %>
+</div>
+

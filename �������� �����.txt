@@ -1,0 +1,67 @@
+puts 'please enter the day of the month'
+day_of_month = gets.chomp
+puts 'now enter the month name'
+month = gets.chomp
+puts 'and the year?'
+year = gets.chomp
+
+ 
+ if (year%4 == 0) && != (year%100 == 0)
+ 	year = leap_year
+ end
+ 
+  
+ if leap_year = true
+ january = 6 && february = 2
+ else
+ january = 0 && february = 3
+ end
+ 
+ 
+ 
+ if month = march
+ month_num = 3
+   elsif month = april
+ month_num = 6
+   elsif month = may
+ month_num = 1
+   elsif month = june
+ month_num = 4
+   elsif month = july
+ month_num = 6
+   elsif month = august
+ month_num = 2
+   elsif month = september
+ month_num = 5
+   elsif month = october
+ month_num = 0
+   elsif month = november
+ month_num = 3
+   elsif month = december
+ month_num = 5
+ 
+ 
+ 
+ 
+ 
+ day_formula = 6 + 11 + year/4 + month_num + day_of_month  
+ 
+ day_num = day_formula%7
+ 
+ if day_num = 0
+ day_of_week = sunday
+   elsif day_num = 1
+ day_of_week = monday
+   elsif day_num = 2
+ day_of_week = tuesday 
+   elsif day_num = 3
+ day_of_week = wednesday 
+   elsif day_num = 4
+ day_of_week = thursday 
+   elsif day_num = 5 
+ day_of_week = friday 
+   elsif day_num = 6 
+ day_of_week = saturday 
+
+ day_of_week = day_of_week
+ puts day_of_week

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Doweet</title>
+
+<%= javascript_include_tag :all %>
+
+<%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/redmond/jquery-ui.css", "application" %>
+<%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js", "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js", "application" %>
+
+<%= stylesheet_link_tag :all %>
+
+<link  href="http://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic&v1" rel="stylesheet" type="text/css" >
+
+<%= csrf_meta_tag %>
+
+
+
+</head>
+<body>
+	
+<center>
+<a href="/"><img src="/images/logo2.png" style="float:left;" /></a> <br /><br />
+<div style="float:right;margin-right:50px" id="nav">
+<% if current_user %>
+  Welcome <%= current_user.name %>!
+  <%= link_to "Sign Out", signout_path %>
+|
+<%= link_to "Add Some Friends", "/friendships/index" %> 
+|
+<%= link_to "Friend requests", requests_path %>
+|
+<%= link_to "Calendar", "/calendar/index" %>
+
+<% end %>
+</div>
+
+<div style="margin-top:175px;">
+
+<%= yield %>
+
+</div>
+
+</center>
+</body>
+</html>
